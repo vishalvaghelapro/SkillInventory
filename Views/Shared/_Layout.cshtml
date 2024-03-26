@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SkillInventory</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/datatables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/css/jquery.datatables.min.css" rel="stylesheet" />
+    <link href="~/css/editor.datatables.min.css" rel="stylesheet" />
+    <link href="~/css/buttons.datatables.min.css" rel="stylesheet" />
+    <link href="~/css/datatables.datetime.min.css" rel="stylesheet" />
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/jquery.datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/SkillInventory.styles.css" asp-append-version="true" />
+
+    <style>
+        .multiselect {
+            width: 100%;
+        }
+
+        .selectBox {
+            position: relative;
+        }
+
+            .selectBox select {
+                width: 100%;
+            }
+
+        .overSelect {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #mySelectOptions {
+            
+            border: 0.5px #7c7c7c solid;
+            background-color: #ffffff;
+            max-height: 150px;
+            overflow-y: scroll;
+        }
+
+            #mySelectOptions label {
+                display: block;
+                font-weight: normal;
+                display: block;
+                white-space: nowrap;
+                min-height: 1.2em;
+                background-color: #ffffff00;
+                padding: 0 2.25rem 0 .75rem;
+                /* padding: .375rem 2.25rem .375rem .75rem; */
+            }
+
+                #mySelectOptions label:hover {
+                    background-color: #1e90ff;
+                }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="title" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="EmployeeDetail" id="title">Skill Inventory</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="form" href="/home/Index">Form</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="data" href="/home/EmployeeDetail">Data</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-2">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="login" href="/home/Login" onclick="login();">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="logout" href="/home/Login" onclick="logout();">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+ 
+    <footer class="border-top footer text-muted" id="footer">
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2022 Copyright <a class="text-reset fw-bold" href="https://github.com/vishalvaghelapro?tab=repositories">&#64;vishalvaghelapro</a> | Made by Vishal Vaghela
+            
+        </div>
+    </footer>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib//jquery/dist/jquery.min.js"></script>
+    <script src="/js/customsc.js"></script>
+    @* <script src="/js/custom.js"></script> *@
+
+    <script type="text/javascript" src="~/DataTable/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/DataTable/jquery.dataTables.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
