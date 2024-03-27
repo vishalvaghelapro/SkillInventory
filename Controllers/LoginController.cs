@@ -1,22 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.DirectoryServices.ActiveDirectory;
-using System.DirectoryServices.AccountManagement;
 using Microsoft.Data.SqlClient;
-using System.Configuration;
 using System.Data;
 using SkillInventory.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using MessagePack;
-using NuGet.Common;
 using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Authorization;
 
 
 namespace SkillInventory.Controllers
 {
-    public class LoginController : PassController
+    public class LoginController : Controller
     {
         public IConfiguration Configuration { get; }
         public LoginController(IConfiguration configuration)
@@ -70,7 +64,7 @@ namespace SkillInventory.Controllers
                     lstroll.ObjRoll = EncryptPasswordBase64(itemRoll);
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenString);
-                    //HttpContext.Session.SetString("JWToken", tokenString);
+                    HttpContext.Session.SetString("JWToken", tokenString);
                     
                     
                 }
@@ -83,7 +77,7 @@ namespace SkillInventory.Controllers
                 LoginRollData loginRollData = new LoginRollData();
                 loginRollData.Oblogin = lstroll.Oblogin;
                 loginRollData.ObjRoll = lstroll.ObjRoll;
-                GetSessionData(loginRollData);
+           
 
 
 

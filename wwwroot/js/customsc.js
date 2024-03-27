@@ -80,7 +80,7 @@ function Login() {
 
                                     })
                                         
-                                    //window.location = "/home/EmployeeDetail";
+                                    window.location = "/home/EmployeeDetail";
                                      //$("Welcome").val(alert("Login Successed"));
 
                                 }
@@ -95,6 +95,7 @@ function Login() {
                                     isSessionStorageClear();
                                 }
                                 $("Welcome").val(alert("Login Successed"));
+                                window.location = "/home/EmployeeDetail";
                             }
                         });
                     }

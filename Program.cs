@@ -1,61 +1,38 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-
-using System.Configuration;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-//Jwt configuration starts here
-//JWT Authentication
-
-
-    var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
-    var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
-    builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    })  
-  
-    .AddJwtBearer(options =>
-     {
-     options.TokenValidationParameters = new TokenValidationParameters
-     {
-         ValidateIssuer = true,
-         ValidateAudience = true,
-         ValidateLifetime = true,
-         ValidateIssuerSigningKey = true,
-         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-         ValidAudience = builder.Configuration["Jwt:Audience"],
-         //ValidIssuer = builder.Configuration["Jwt:Issuer"],
-         //ValidAudience = builder.Configuration["Jwt:Audience"],
-         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-         //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-     };
- });
-
-builder.Services.Configure<CookiePolicyOptions>(options =>
+var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
+var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
+builder.Services.AddAuthentication(options =>
 {
-    // This lambda determines whether user consent for non-essential cookies is needed for a given request.  
-    options.CheckConsentNeeded = context => true;
-    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        //ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        //ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+    };
 });
-//Jwt configuration ends here
-
-// add services to the container.
-
-
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,9 +45,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 app.UseSession();
-app.UseCookiePolicy();
 app.Use(async (context, next) =>
 {
     var JWToken = context.Session.GetString("JWToken");
@@ -80,28 +57,23 @@ app.Use(async (context, next) =>
     }
     await next();
 });
-
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.UseEndpoints(endpoints =>
     {
  
         endpoints.MapControllerRoute(
-         name: "default",
-         pattern: "{controller=Home}/{action=Login}/{id?}"
-             );
+        name: "default",
+        pattern: "{controller=Home}/{action=Login}/{id?}");
         endpoints.MapControllerRoute(
-                name: "EmployeeDetail",
-                pattern: "{controller=Home}/{action=EmployeeDetail}/{id?}"
-            );
-
+        name: "EmployeeDetail",
+        pattern: "{controller=Home}/{action=EmployeeDetail}/{id?}");
         endpoints.MapControllerRoute(
-                name: "Index",
-                pattern: "{controller=Home}/{action=Index}/{id?}"
-            );
-    }
-);
+        name: "Index",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    });
 
 //app.MapControllerRoute(
 //    name: "default",
