@@ -24,7 +24,7 @@ function getEmpData(res) {
         success: OnSuccess,
 
     })
-    //  window.location = "/home/EmployeeDetail";
+      
 }
 
 function OnSuccess(response) {
@@ -340,7 +340,7 @@ $.ajax({
         $.each(res, function (data, value) {
 
             // $('#DropDepartment').append('<Option value=' + value.department + '>' + value.department + '</Option>');
-            $("#DropDepartment").append($("<option     />").val(this.department).text(this.department));
+            $("#DropDepartment").append($("<option     />").val(this.departmentName).text(this.departmentName));
 
         });
         data = null;

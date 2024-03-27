@@ -6,13 +6,13 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using SkillInventory.Data;
 using SkillInventory.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SkillInventory.Controllers
 {
@@ -80,6 +80,7 @@ namespace SkillInventory.Controllers
 
                 var data = lst;
                 return new JsonResult(data);
+
             }
             catch (Exception ex)
             {
@@ -89,14 +90,20 @@ namespace SkillInventory.Controllers
 
             return new JsonResult("123");
         }
-
-        [HttpGet]
+        //[Route("Home/EmployeeDetail")]
+        public IActionResult redirectEmployeeDetails()
+        {
+            GetData();
+            
+            return RedirectToAction("EmployeeDetail", "home");
+        }
+            [HttpGet]
         public JsonResult GetDepartmentName()
         {
             try
             {
                 SqlConnection conn = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
-                List<Employee> lst = new List<Employee>();
+                List<Department> lst = new List<Department>();
                 SqlCommand cmd = conn.CreateCommand();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -111,9 +118,10 @@ namespace SkillInventory.Controllers
                 foreach (DataRow dr in dt.Rows)
                 {
                     lst.Add(
-                        new Employee
+                        new Department
                         {
-                            Department = Convert.ToString(dr["Department"])
+                            //DepartmentId = Convert.ToInt32(dr["DepartmentId"]),
+                            DepartmentName = Convert.ToString(dr["DepartmentName"])
                         });
 
                 }

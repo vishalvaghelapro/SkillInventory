@@ -70,7 +70,7 @@ function Login() {
                             success: function (role) {
                                 if (role === "Employee") {
                                     $.ajax({
-                                        url: 'https://192.168.10.203/',
+                                        url: '/Home/EmployeeDetails',
                                         type: 'Get',
                                         data: headerToken,
                                         headers: {
@@ -78,22 +78,23 @@ function Login() {
                                             //"Authorization": "Bearer your_access_token"
                                         },
 
-                                    }),
+                                    })
                                         
-                                     window.location = "/home/EmployeeDetail";
-                                     $("Welcome").val(alert("Login Successed"));
+                                    //window.location = "/home/EmployeeDetail";
+                                     //$("Welcome").val(alert("Login Successed"));
 
                                 }
                                 else if (role === "Admin") {
                                     //EmpDetails(res);
-                                    window.location = "/home/EmployeeDetail";
+                                    location.href = "/home/EmployeeDetail";
                                     //history.pushState(null, null, "/home/EmployeeDetail");
-                                    $("Welcome").val(alert("Login Successed"));
+                                    //$("Welcome").val(alert("Login Successed"));
                                 }
                                 else {
                                     alert("User Doesn't Exit");
                                     isSessionStorageClear();
                                 }
+                                $("Welcome").val(alert("Login Successed"));
                             }
                         });
                     }

@@ -9,6 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using MessagePack;
+using NuGet.Common;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace SkillInventory.Controllers
 {
@@ -64,7 +68,11 @@ namespace SkillInventory.Controllers
                     tokenString = GenerateJSONWebToken(employeeSkill);
                     lstroll.Oblogin = Convert.ToString(tokenString);
                     lstroll.ObjRoll = EncryptPasswordBase64(itemRoll);
-
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenString);
+                    //HttpContext.Session.SetString("JWToken", tokenString);
+                    
+                    
                 }
                 else
                 {

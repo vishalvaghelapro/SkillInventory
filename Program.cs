@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using SkillInventory.Data;
+
 using System.Configuration;
 using System.Text;
 
@@ -23,7 +23,8 @@ var builder = WebApplication.CreateBuilder(args);
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
+    })  
+  
     .AddJwtBearer(options =>
      {
      options.TokenValidationParameters = new TokenValidationParameters
@@ -40,17 +41,21 @@ var builder = WebApplication.CreateBuilder(args);
          //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
      };
  });
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.  
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 //Jwt configuration ends here
 
 // add services to the container.
-builder.Services.AddDbContext<SkillDbContext>(
-    options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-        ));
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -64,7 +69,17 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseSession();
+app.UseCookiePolicy();
+app.Use(async (context, next) =>
+{
+    var JWToken = context.Session.GetString("JWToken");
+    if (!string.IsNullOrEmpty(JWToken))
+    {
+        context.Request.Headers.Add("Authorization", "Bearer " + JWToken);
+    }
+    await next();
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -100,6 +115,7 @@ app.UseEndpoints(endpoints =>
 //    name: "EmployeeDetail",
 //    pattern: "{controller=Home}/{action=EmployeeDetail}/{id?}"
 //    );
+
 
 
 app.Run();

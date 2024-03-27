@@ -13,12 +13,17 @@ namespace SkillInventory.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
+
+        [Authorize]
         public IActionResult EmployeeDetail()
         {
+           
             return View();
         }
 
