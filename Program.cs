@@ -71,8 +71,8 @@ app.UseEndpoints(endpoints =>
         name: "EmployeeDetail",
         pattern: "{controller=Home}/{action=EmployeeDetail}/{id?}");
         endpoints.MapControllerRoute(
-        name: "Index",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        name: "Registration",
+        pattern: "{controller=Home}/{action=Registration}/{id?}");
     });
 
 //app.MapControllerRoute(

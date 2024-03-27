@@ -17,7 +17,7 @@ namespace SkillInventory.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Registration()
         {
             return View();
         }
