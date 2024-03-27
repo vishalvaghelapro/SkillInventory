@@ -83,7 +83,8 @@
                             <a class="nav-link text-dark" id="login" href="/home/Login" onclick="login();">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" id="logout" href="/home/Login" onclick="logout();">Logout</a>
+                            @* <a class="nav-link text-dark" id="logout" href="/home/Login" onclick="logout();">Logout</a> *@
+                            <a class="nav-link text-dark" id="logout" asp-area="" asp-controller="Home" asp-action="Logout" onclick="logout();">Logout</a>
                         </li>
                     </ul>
                 </div>

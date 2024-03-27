@@ -19,8 +19,8 @@ namespace SkillInventory.Controllers
 
     //[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     //[AllowAnonymous]
-   
-    public class EmployeeController : Controller
+    [Authorize]
+     public class EmployeeController : Controller
     {
         
         public IActionResult Index()
