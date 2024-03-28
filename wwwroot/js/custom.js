@@ -171,7 +171,8 @@ function AddEmpData() {
         Department: $('#DropDepartment').val(),
         AllSkillId: multiselectOption.value,
         ProficiencyLevel: $('#Proficiency').val(),
-        roll: $("#Roll").val(),
+        //roll: $("#Roll").val(),
+        roll: $('input[name="Roll"]:checked').val(),
         password: $("#Password").val()
     };
 
@@ -225,7 +226,8 @@ function EditBtn(employeeSkillId) {
                 $("#DropDepartment").val(item.department);
                 $("#DropEditSkill").val(item.skillName);
                 $("#DropEditSkill").val(item.skillId);
-                $("#Proficiency").val(item.proficiencyLevel);
+              //  $("#Proficiency").val(item.proficiencyLevel);
+                $("input[name='Proficiency'][value='" + item.proficiencyLevel + "']").prop("checked", true);
                 $('#UpdateBtn');
             });
         },
@@ -244,7 +246,8 @@ function UpdateEmpBtn() {
         Email: $('#Email').val(),
         Department: $('#DropDepartment').val(),
         SkillId: $('#DropEditSkill').val(),
-        ProficiencyLevel: $('#Proficiency').val()
+        //ProficiencyLevel: $('#Proficiency').val(),
+        ProficiencyLevel: $("input[name='Proficiency']:checked").val(),
     };
 
     $.ajax({

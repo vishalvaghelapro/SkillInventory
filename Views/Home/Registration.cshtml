@@ -1,7 +1,6 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Registration";
-  
+
 }
 
 <section class="p-3 p-md-4 p-xl-5">
@@ -82,46 +81,63 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 mb-3">
+                                <div class="form-group col-md mt-2 mb-3 ">
+                                    <label for="Proficiency">Proficiency Level&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Beginner">
+                                        <label class="form-check-label" for="beginnerRadio">
+                                            Beginner
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Intermediate">
+                                        <label class="form-check-label" for="intermediateRadio">
+                                            Intermediate
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Expert">
+                                        <label class="form-check-label" for="expertRadio">
+                                            Expert
+                                        </label>
+                                    </div>
+                                    @* <div class="col-md-12 mb-3">
                                     <label for="Proficiency">Proficiency Level:</label>
                                     <input id="Proficiency" class="form-control" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="Roll">Roll</label>
-                                    <input id="Roll" class="form-control" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="Password">Password</label>
-                                    <input type="password" id="Password" class="form-control" required>
-                                </div>
+                                    </div> *@
+                                    <div class="form-group col-md mt-3 mb-3">
+                                        <label for="Roll">Roll&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
-                                @*    <div class="form-group col-md-6 mb-3">
-                                <label>Proficiency Level:</label>
-                                <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" name="beginnerRadio" id="beginnerRadio" value="Beginner">
-                                <label class="form-check-label" for="beginnerRadio">
-                                Beginner
-                                </label>
-                                </div>
-                                <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" name="intermediateRadio" id="intermediateRadio" value="Intermediate">
-                                <label class="form-check-label" for="intermediateRadio">
-                                Intermediate
-                                </label>
-                                </div>
-                                <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" name="expertRadio" id="expertRadio" value="Expert">
-                                <label class="form-check-label" for="expertRadio">
-                                Expert
-                                </label>
-                                </div>
-                                </div> *@
-                                <div class="col-12 mt-3 col d-flex justify-content-center">
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Roll" id="Roll" value="Employee">
+                                            <label class="form-check-label" for="intermediateRadio">
+                                                Employee
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Roll" id="Roll" value="Admin">
+                                            <label class="form-check-label" for="beginnerRadio">
+                                                Admin
+                                            </label>
+                                        </div>
 
-                                    <button type="button" class="btn-primary btn-lg align-content-center" onclick="AddEmpData();">Submit</button>
 
+                                        @*    <div class="col-md-12 mt-3 mb-3">
+                                        <label for="Roll">Roll</label>
+                                        <input id="Roll" class="form-control" required>
+                                        </div> *@
+                                        <div class="col-md-12 mt-3 mb-3">
+                                            <label for="Password">Password</label>
+                                            <input type="password" id="Password" class="form-control" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12 mt-3 col d-flex justify-content-center">
+
+                                        <button type="button" class="btn-primary btn-lg align-content-center" onclick="AddEmpData();">Submit</button>
+
+                                    </div>
                                 </div>
-                            </div>
                         </form>
                         <div class="row">
 
@@ -142,9 +158,6 @@
 </section>
 @section scripts{
 
-
     <script src="/js/customsc.js"></script>
     <script src="/js/custom.js"></script>
-
 }
-
