@@ -19,7 +19,7 @@
                             </div>
                         </div>
 
-                        <form>
+                        <form class="row g-3 needs-validation" novalidate>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label for="FName">First name</label>
@@ -36,7 +36,8 @@
                                 <div class="col-md-12 mb-3">
                                     <label for="DropDepartment">Department</label>
                                     <select id="DropDepartment" class="form-control" required>
-                                        <option value="0">Select</option>
+                                        <option selected disabled value="">Select Department...</option>
+                                        <option>...</option>
                                     </select>
                                 </div>
                                 @*  <div class="col-md-6 mb-3">
@@ -71,8 +72,9 @@
                                     @* DropDown Selected Value *@
                                     <div id="myMultiselect" class="multiselect">
                                         <div id="mySelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
-                                            <select class="form-control">
-                                                <option>Select</option>
+                                            <select class="form-control" required>
+                                                <option selected disabled value="">Select Skill...</option>
+                                              
                                             </select>
                                             <div class="overSelect"></div>
                                         </div>
@@ -84,19 +86,19 @@
                                 <div class="form-group col-md mt-2 mb-3 ">
                                     <label for="Proficiency">Proficiency Level&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                     <div class="form-check-inline">
-                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Beginner">
+                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Beginner" required>
                                         <label class="form-check-label" for="beginnerRadio">
                                             Beginner
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
-                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Intermediate">
+                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Intermediate" required>
                                         <label class="form-check-label" for="intermediateRadio">
                                             Intermediate
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
-                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Expert">
+                                        <input class="form-check-input" type="radio" name="Proficiency" id="Proficiency" value="Expert" required>
                                         <label class="form-check-label" for="expertRadio">
                                             Expert
                                         </label>
@@ -109,13 +111,13 @@
                                         <label for="Roll">Roll&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" name="Roll" id="Roll" value="Employee">
+                                            <input class="form-check-input" type="radio" name="Roll" id="Roll" value="Employee" required>
                                             <label class="form-check-label" for="intermediateRadio">
                                                 Employee
                                             </label>
                                         </div>
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" name="Roll" id="Roll" value="Admin">
+                                            <input class="form-check-input" type="radio" name="Roll" id="Roll" value="Admin" required >
                                             <label class="form-check-label" for="beginnerRadio">
                                                 Admin
                                             </label>
@@ -134,7 +136,7 @@
                                     </div>
                                     <div class="col-12 mt-3 col d-flex justify-content-center">
 
-                                        <button type="button" class="btn-primary btn-lg align-content-center" onclick="AddEmpData();">Submit</button>
+                                        <button type="submit" class="btn-primary btn-lg align-content-center" onclick="AddEmpData();">Submit</button>
 
                                     </div>
                                 </div>
@@ -157,7 +159,10 @@
 
 </section>
 @section scripts{
+       
 
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib//jquery/dist/jquery.min.js"></script>
     <script src="/js/customsc.js"></script>
     <script src="/js/custom.js"></script>
 }
